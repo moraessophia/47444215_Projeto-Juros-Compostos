@@ -1,0 +1,50 @@
+import subprocess # Biblioteca usada para executar comandos do sistema operacional
+import math # Importei toda biblioteca math
+import datetime # Importei toda biblioteca datetime
+
+def formata_valor(valor):#criei uma função, tudo que me retorna valores são chamadas de funções. Após a criação da função eu a nomeiei e criei um parametro: (que são onde eu guardo a informações necessarias para que a função me retorne o valor)
+    return f"R$ {valor:_.2f}".replace('.',',').replace('_','.')# nesta função eu estou dizendo para o programa fromartar um valor após duas casas decimais e que eu quero formatar os valores "." para " e "_" para "."
+
+def montante_final(capital_inicial,taxa_Juros, meses):
+        return capital_inicial * math.pow((1+taxa_Juros/100),meses)
+    
+subprocess.run('cls', shell=True) # cls limpa o terminal
+
+try:#Aqui eu estou pedindo para que meu pograma tente fazer algo, mas se o usuario errar um dado ele retorna com erro
+
+    tipo_inestimento = (input("Escolha o tipo de invetimento (CDB ou LCI): "))
+    capital_inicial = float(input("Capital inicial: ")) # Solicitei um valor flutuante ao usúario
+    taxa_Juros = float(input("Taxa de juros mensal (em %): ")) # Solicitei um valor flutuante ao usúario
+    meses = int(input("Número de meses: ")) # Solicitei um valor inteiro ao usúario, lembresse alguns problemas irão exigir mais de um tipo de variável, aqui um número inteiro, pois meses não são numeros decimais
+
+
+    from math import pow #Sintaxe para importar uma ferramenta específica de uma biblioteca, 
+    # Importa apenas a função pow da biblioteca math
+    # pow é usada para calcular potência (exponenciação)
+    
+
+    from datetime import datetime, timedelta # Aqui utlizei duas ferramentas de uma mesma biblioteca, por isso utilizamos a virgula, datetime "Data e Hora" Time delta "permite que eu some ou subtraia datas"
+
+    Aplicação = datetime.today()  # Criei uma variável que recebe a data atual usando datetime.today()
+    Vencimento = Aplicação + timedelta(days=meses*30) # Criei outra variavel e utilizei a ferramenta timedelta especificando que a data da variavel meses seria multiplicada por 30
+    # timedelta soma dias à data atual
+    # multipliquei meses por 30 para transformar meses em dias
+except ValueError:  #valor errado, aqui ele enetende que quando um usuario erra um dado ele retorna com a frase errado tente novamente
+    print("Valor incorreto! Tente Novamente ")
+
+else:# Se o usuario forneceu os valores corretos ele vai dar continuidade ao programa
+    
+    print("\n") #Print vazio e um \n quebra uma linha sem precisar de caracteres
+    print("Resumo do investimento \n ")
+    print(f"Tipo de Investimento: {tipo_inestimento}")
+    print(f"Capital Inicial: {formata_valor(capital_inicial)}")
+    print(f"Taxa de Juros Mensal: {taxa_Juros}%")
+    print(f"Período: {meses} meses \n")
+    print(f"Montante Final: R$ {formata_valor(montante_final(capital_inicial,taxa_Juros,meses))}\n" ) # {m:.2f} especifiquei que quero apenas 2 casas após o .
+    print("Datas \n")
+    print(f"Aplicação: {Aplicação.strftime('%d/%m/%Y')}") # strftime utilizei para especificar a ordem da data que queria, "string format time"
+    print(f"Vencimento: {Vencimento.strftime('%d/%m/%Y')}") 
+    
+    
+    
+input('\n Enter para Continuar...')
